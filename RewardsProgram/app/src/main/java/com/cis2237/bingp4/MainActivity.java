@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private String name = "None";
 
     private Button btnFindStatus, btnRestart;
-    private EditText etName, etMilesFlown;
+    private EditText etName, etAirline, etMilesFlown;
     private TextView txtInfo;
     private RewardsDbAdapter mDbAdapter;
 
@@ -187,14 +187,32 @@ public class MainActivity extends AppCompatActivity {
                 throw new IllegalArgumentException("Name is Empty - Enter a Name.");
             } else {
 
-                SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putString(NAME, temp);
-                editor.commit();
+                // name is okay, get miles flown and check that it is valid
+                getAirline();
+            }
+
+        }
+        catch (IllegalArgumentException e){ // catch the error
+            txtInfo.setText(e.getMessage());
+        }
+    }
+
+    // get and process the airline field
+    public void getAirline() {
+
+        // set up local variables
+        String temp = etAirline.getText().toString();
+
+        // get airline and check that airline is not empty
+        try {
+            if  (temp.isEmpty()) {
+                // if entry is made then throw error
+                throw new IllegalArgumentException("Airline is Empty - Enter a Airline.");
+            } else {
 
                 // name is okay, get miles flown and check that it is valid
                 getMilesFlown();
             }
-
         }
         catch (IllegalArgumentException e){ // catch the error
             txtInfo.setText(e.getMessage());

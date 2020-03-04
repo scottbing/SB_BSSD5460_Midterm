@@ -24,6 +24,15 @@
     <string name="log_onCreateOptionsMenu">in onCreateOptionsMenu&#8230;</string>
     <string name="log_release_resources">Release Resources&#8230;</string>
     <string name="log_freeFlight">Free Flight&#8230;</string>
+    <string name="frequent_flier_miles_status">Frequent Flier Miles Status</string>
+    <string name="rewards_rules_are_available_in_the_action_bar_menu">Rewards Rules are available in the Action Bar
+        Menu
+    </string>
+    <string name="name">Name:</string>
+    <string name="airline">Airline:</string>
+    <string name="miles">Miles:</string>
+    <string name="status">Status:</string>
+    <string name="press_to_redeem_rewards">Press to Redeem Rewards</string>
 
 
 </resources>

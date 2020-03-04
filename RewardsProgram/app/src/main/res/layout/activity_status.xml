@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dip"
-            android:text="Frequent Flier Miles Status"
+            android:text="@string/frequent_flier_miles_status"
             android:textSize="20sp"
             android:textStyle="bold"
             />
@@ -29,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:text="Rewards Rules are available in the Action Bar Menu"
+            android:text="@string/rewards_rules_are_available_in_the_action_bar_menu"
             android:id="@+id/txtMessage"
             android:layout_gravity="center_horizontal"
             android:textStyle="bold" />
@@ -46,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"
-                android:text="Name: "
+                android:text="@string/name"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="left" />
 
@@ -66,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"
-                android:text="Airline: "
+                android:text="@string/airline"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="left" />
 
@@ -87,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"
-                android:text="Miles: "
+                android:text="@string/miles"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="left" />
 
@@ -106,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"
-                android:text="Status: "
+                android:text="@string/status"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="left" />
 
@@ -133,7 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:text="Press to Redeem Rewards" />
+            android:text="@string/press_to_redeem_rewards" />
 
         <TextView
             android:id="@+id/txtMsg"
