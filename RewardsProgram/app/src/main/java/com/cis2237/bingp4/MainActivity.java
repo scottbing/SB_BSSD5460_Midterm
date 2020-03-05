@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String PREF_NAME = "myPreferences";
     public static final String NAME = "myName";
+    public static final String AIRLINE = "myAirine";
     public static final String MILES = "myMilesFlown";
 
     private int miles = 0;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         // instantiate the objects
         etName = (EditText) findViewById(R.id.etName);
         etMilesFlown = (EditText) findViewById(R.id.etMilesFlown);
+        etAirline = (EditText) findViewById(R.id.etAirline);
         btnFindStatus = (Button) findViewById(R.id.btnFindStatus);
         btnRestart = (Button) findViewById(R.id.btnRestart);
         txtInfo = (TextView) findViewById(R.id.txtInfo);
@@ -168,6 +170,10 @@ public class MainActivity extends AppCompatActivity {
 
             initializeDatabase();
 
+    /*        SharedPreferences.Editor editor = sharedPrefs.edit();
+            editor.putString(MILES, 0);
+            editor.commit();*/
+
             /*//Clear all data
             mDbAdapter.deleteAllRewards();
             //Add some data
@@ -186,6 +192,10 @@ public class MainActivity extends AppCompatActivity {
                 // if entry is made then throw error
                 throw new IllegalArgumentException("Name is Empty - Enter a Name.");
             } else {
+
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                editor.putString(NAME, temp);
+                editor.commit();
 
                 // name is okay, get miles flown and check that it is valid
                 getAirline();
@@ -210,6 +220,10 @@ public class MainActivity extends AppCompatActivity {
                 throw new IllegalArgumentException("Airline is Empty - Enter a Airline.");
             } else {
 
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                editor.putString(AIRLINE, temp);
+                editor.commit();
+
                 // name is okay, get miles flown and check that it is valid
                 getMilesFlown();
             }
@@ -233,7 +247,6 @@ public class MainActivity extends AppCompatActivity {
             num = Integer.parseInt(milesFlown) + sharedPrefs.getInt(MILES, miles);
 
             SharedPreferences.Editor editor = sharedPrefs.edit();
-
             editor.putInt(MILES, num);
             editor.commit();
 

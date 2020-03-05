@@ -25,13 +25,15 @@ public class StatusActivity extends AppCompatActivity {
     public static final String PREF_NAME = "myPreferences";
     public static final String NAME = "myName";
     public static final String MILES = "myMilesFlown";
+    public static final String AIRLINE = "myAirline";
     public static final String STATUS = "myStatus";
 
     private int miles = 0;
     private String name = "None";
+    private String airline = "None";
     private String status = "No Rewards";
 
-    public TextView txtName, txtMilesAccumulated, txtStatus;
+    public TextView txtName, txtMilesAccumulated, txtAirline, txtStatus;
     public Button btnRedeemRewards;
     public ImageView imgReward;
 
@@ -45,6 +47,7 @@ public class StatusActivity extends AppCompatActivity {
         // instantiate Objects
         txtName = (TextView)findViewById(R.id.txtName);
         txtMilesAccumulated = (TextView)findViewById(R.id.txtMilesAccumulated);
+        txtAirline = (TextView)findViewById(R.id.txtAirline);
         txtStatus = (TextView)findViewById(R.id.txtStatus);
         btnRedeemRewards = (Button)findViewById(R.id.btnRedeemRewards);
         imgReward = (ImageView) findViewById(R.id.imgReward);
@@ -53,6 +56,7 @@ public class StatusActivity extends AppCompatActivity {
 
         // get and display current values
         txtName.setText(sharedPrefs.getString(NAME, "None"));
+        txtAirline.setText(sharedPrefs.getString(AIRLINE, "None"));
         miles = sharedPrefs.getInt(MILES,0);
         txtMilesAccumulated.setText(Integer.toString(miles));
 
@@ -199,6 +203,7 @@ public class StatusActivity extends AppCompatActivity {
         name = sharedPrefs.getString(NAME, "None");
         txtName.setText(name);
         miles = sharedPrefs.getInt(MILES, 0);
+        txtAirline.setText(sharedPrefs.getString(AIRLINE, "None"));
         txtMilesAccumulated.setText(Integer.toString(miles));
         status = sharedPrefs.getString(STATUS, "");
         txtStatus.setText(status);

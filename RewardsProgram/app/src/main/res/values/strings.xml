@@ -33,6 +33,7 @@
     <string name="miles">Miles:</string>
     <string name="status">Status:</string>
     <string name="press_to_redeem_rewards">Press to Redeem Rewards</string>
+    <string name="remaining_miles">Remaining Miles:</string>
 
 
 </resources>

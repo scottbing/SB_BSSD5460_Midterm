@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dip"
-            android:text="@string/frequent_flier_miles_status"
+            android:text="Frequent Flier Miles Status"
             android:textSize="20sp"
             android:textStyle="bold"
             />
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:text="@string/rewards_rules_are_available_in_the_action_bar_menu"
+            android:text="Rewards Rules are available in the Action Bar Menu"
             android:id="@+id/txtMessage"
             android:layout_gravity="center_horizontal"
             android:textStyle="bold" />
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:columnCount="2"
-            android:rowCount="2" >
+            android:rowCount="3" >
 
             <TextView
                 android:id="@+id/lblName"
@@ -47,10 +47,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"
-                android:text="@string/name"
+                android:text="Name: "
                 android:layout_marginTop="10dp"
                 android:layout_gravity="left" />
-
 
             <TextView
                 android:id="@+id/txtName"
@@ -60,17 +59,16 @@
                 android:layout_marginTop="10dp"
                 android:textSize="18sp"
                 android:layout_gravity="left" />
- 
+
             <TextView
                 android:id="@+id/lblAirline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"
-                android:text="@string/airline"
+                android:text="Airline: "
                 android:layout_marginTop="10dp"
                 android:layout_gravity="left" />
-
 
             <TextView
                 android:id="@+id/txtAirline"
@@ -80,7 +78,6 @@
                 android:layout_marginTop="10dp"
                 android:textSize="18sp"
                 android:layout_gravity="left" />
-                
 
             <TextView
                 android:id="@+id/lblMilesAccumulated"
@@ -88,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"
-                android:text="@string/miles"
+                android:text="Miles: "
                 android:layout_marginTop="10dp"
                 android:layout_gravity="left" />
 
@@ -107,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"
-                android:text="@string/status"
+                android:text="Status: "
                 android:layout_marginTop="10dp"
                 android:layout_gravity="left" />
 
@@ -134,7 +131,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:text="@string/press_to_redeem_rewards" />
+            android:text="Press to Redeem Rewards" />
 
         <TextView
             android:id="@+id/txtMsg"
