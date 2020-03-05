@@ -4,15 +4,23 @@ public class Customer {
 
     private int id;
     private String name;
-    private String frequentFlyer;
+    private String airline;
     private int miles;
+
+    public String getAirline() {
+        return airline;
+    }
+
+    public void setAirline(String airline) {
+        this.airline = airline;
+    }
 
     public Customer() {}
 
-    public Customer(int id, String name, String frequentFlyer, int miles) {
+    public Customer(int id, String name, String airline, int miles) {
         this.id = id;
         this.name = name;
-        this.frequentFlyer = frequentFlyer;
+        this.airline = airline;
         this.miles = miles;
     }
 
@@ -40,11 +48,4 @@ public class Customer {
         this.name = name;
     }
 
-    public String getFrequentFlyer() {
-        return frequentFlyer;
-    }
-
-    public void setFrequentFlyer(String frequentFlyer) {
-        this.frequentFlyer = frequentFlyer;
-    }
 }

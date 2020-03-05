@@ -197,6 +197,8 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString(NAME, temp);
                 editor.commit();
 
+                Customer customer = mDbAdapter.fetchCustomerByName(temp);
+
                 // name is okay, get miles flown and check that it is valid
                 getAirline();
             }

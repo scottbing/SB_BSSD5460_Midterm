@@ -90,14 +90,14 @@ public class RewardsDbAdapter {
     public long createCustomer(Customer customer) {
         ContentValues values = new ContentValues();
         values.put(COL_NAME, customer.getName()); // Contact Name
-        values.put(COL_AIRLINE, customer.getFrequentFlyer());
+        values.put(COL_AIRLINE, customer.getAirline());
         values.put(COL_MILES, customer.getMiles());
 
         // Inserting Row
         return mDb.insert(TABLE_NAME, null, values);
     }
 
-    //  Fetch a single customer
+    //  Fetch a single customer by id
     public Customer fetchCustomerById(int id) {
 
         Cursor cursor = mDb.query(TABLE_NAME, new String[]{COL_ID,
@@ -115,6 +115,26 @@ public class RewardsDbAdapter {
 
     }
 
+    //  Fetch a single customerby name
+    public Customer fetchCustomerByName(String name) {
+
+        Cursor cursor = mDb.query(TABLE_NAME, new String[]{COL_NAME,
+                        COL_NAME, COL_AIRLINE, COL_MILES}, COL_NAME + "=?",
+                new String[]{String.valueOf(name)}, null, null, null, null
+        );
+        if (cursor != null)
+            cursor.moveToFirst();
+        return new Customer(
+                cursor.getInt(INDEX_ID),
+                cursor.getString(INDEX_NAME),
+                cursor.getString(INDEX_AIRLINE),
+                cursor.getInt(INDEX_MILES)
+        );
+
+    }
+
+
+
     // Get all customers
     public Cursor fetchAllRewards() {
         Cursor mCursor = mDb.query(TABLE_NAME, new String[]{COL_ID,
@@ -131,7 +151,7 @@ public class RewardsDbAdapter {
     public void updateCustomer(Customer customer) {
         ContentValues values = new ContentValues();
         values.put(COL_NAME, customer.getName());
-        values.put(COL_AIRLINE, customer.getFrequentFlyer());
+        values.put(COL_AIRLINE, customer.getAirline());
         values.put(COL_MILES, customer.getMiles());
         mDb.update(TABLE_NAME, values,
                 COL_ID + "=?", new String[]{String.valueOf(customer.getId())});
