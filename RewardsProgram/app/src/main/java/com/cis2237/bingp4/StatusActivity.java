@@ -33,6 +33,8 @@ public class StatusActivity extends AppCompatActivity {
     private String airline = "None";
     private String status = "No Rewards";
 
+    private RewardsDbAdapter mDbAdapter;
+
     public TextView txtName, txtMilesAccumulated, txtAirline, txtStatus;
     public Button btnRedeemRewards;
     public ImageView imgReward;
@@ -53,6 +55,10 @@ public class StatusActivity extends AppCompatActivity {
         imgReward = (ImageView) findViewById(R.id.imgReward);
 
         sharedPrefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+
+        mDbAdapter = new RewardsDbAdapter(this);
+        mDbAdapter = RewardsDbAdapter.getInstance();
+        mDbAdapter.open();
 
         // get and display current values
         txtName.setText(sharedPrefs.getString(NAME, "None"));
@@ -200,11 +206,18 @@ public class StatusActivity extends AppCompatActivity {
     }
 
     private void displayPreferences() {
-        name = sharedPrefs.getString(NAME, "None");
+        Intent intent = getIntent();
+        String user_name = intent.getStringExtra("USER_NAME");
+        Customer customer = mDbAdapter.fetchCustomerByName("Peter");
+        name = customer.getName();
         txtName.setText(name);
-        miles = sharedPrefs.getInt(MILES, 0);
-        txtAirline.setText(sharedPrefs.getString(AIRLINE, "None"));
+
+        miles = customer.getMiles();
         txtMilesAccumulated.setText(Integer.toString(miles));
+
+        airline = customer.getAirline();
+        txtAirline.setText(airline);
+
         status = sharedPrefs.getString(STATUS, "");
         txtStatus.setText(status);
     }

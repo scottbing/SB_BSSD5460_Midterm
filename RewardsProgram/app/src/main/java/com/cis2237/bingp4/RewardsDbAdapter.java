@@ -122,7 +122,7 @@ public class RewardsDbAdapter {
                         COL_NAME, COL_AIRLINE, COL_MILES}, COL_NAME + "=?",
                 new String[]{String.valueOf(name)}, null, null, null, null
         );
-        if (cursor != null)
+        if (cursor.getCount() != 0)
             cursor.moveToFirst();
         return new Customer(
                 cursor.getInt(INDEX_ID),

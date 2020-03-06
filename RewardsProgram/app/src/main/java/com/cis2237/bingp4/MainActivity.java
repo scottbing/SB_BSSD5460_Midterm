@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String MILES = "myMilesFlown";
 
     private int miles = 0;
+    private int milesBalance;
+    String customer, airlinePlan;
     private String name = "None";
 
     private Button btnFindStatus, btnRestart;
@@ -146,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
         switch(item.getItemId())
         {
             case R.id.showRules:
+
                 startActivity(new Intent(MainActivity.this, RulesActivity.class));
                 return true;
         }
@@ -182,22 +185,22 @@ public class MainActivity extends AppCompatActivity {
 
 
         // set up local variables
-        String temp = etName.getText().toString();
+        customer = etName.getText().toString();
         int num = 0;
         String nameMsg = "", milesMsg ="";
 
         // get name and check that name is not empty
         try {
-            if  (temp.isEmpty()) {
+            if  (customer.isEmpty()) {
                 // if entry is made then throw error
                 throw new IllegalArgumentException("Name is Empty - Enter a Name.");
             } else {
 
                 SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putString(NAME, temp);
+                editor.putString(NAME, customer);
                 editor.commit();
 
-                Customer customer = mDbAdapter.fetchCustomerByName(temp);
+                //Customer customer = mDbAdapter.fetchCustomerByName(temp);
 
                 // name is okay, get miles flown and check that it is valid
                 getAirline();
@@ -213,17 +216,17 @@ public class MainActivity extends AppCompatActivity {
     public void getAirline() {
 
         // set up local variables
-        String temp = etAirline.getText().toString();
+        airlinePlan = etAirline.getText().toString();
 
         // get airline and check that airline is not empty
         try {
-            if  (temp.isEmpty()) {
+            if  (airlinePlan.isEmpty()) {
                 // if entry is made then throw error
                 throw new IllegalArgumentException("Airline is Empty - Enter a Airline.");
             } else {
 
                 SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putString(AIRLINE, temp);
+                editor.putString(AIRLINE, airlinePlan);
                 editor.commit();
 
                 // name is okay, get miles flown and check that it is valid
@@ -246,17 +249,23 @@ public class MainActivity extends AppCompatActivity {
 
         // accumulate miles
         try {
-            num = Integer.parseInt(milesFlown) + sharedPrefs.getInt(MILES, miles);
+            milesBalance = Integer.parseInt(milesFlown);
 
             SharedPreferences.Editor editor = sharedPrefs.edit();
             editor.putInt(MILES, num);
             editor.commit();
 
+            mDbAdapter.createCustomer(customer, airlinePlan, milesBalance);
+
             // debug
             // Toast.makeText(getApplicationContext(), "Get Miles Flown " + sharedPrefs.getInt(MILES, 0), Toast.LENGTH_SHORT).show();
 
             // display results in StatusActivity
-            startActivity(new Intent(MainActivity.this, StatusActivity.class));
+            Intent intent = new Intent(this, StatusActivity.class);
+
+            intent.putExtra("USER_NAME", customer);
+            //startActivity(new Intent(MainActivity.this, StatusActivity.class));
+            startActivity(intent);
 
         } catch (final NumberFormatException e) {
             // Toast.makeText(getApplicationContext(), "Get Miles Flown " + num + " Invalid Number", Toast.LENGTH_LONG).show();
