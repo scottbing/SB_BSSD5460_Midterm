@@ -25,8 +25,8 @@ public class RewardsDbAdapter {
     public static final int INDEX_ID = 0;
     public static final int INDEX_NAME = INDEX_ID + 1;
     public static final int INDEX_AIRLINE = INDEX_ID + 2;
-    public static final int INDEX_STATUS = INDEX_ID + 2;
-    public static final int INDEX_MILES = INDEX_ID + 2;
+    public static final int INDEX_STATUS = INDEX_ID + 3;
+    public static final int INDEX_MILES = INDEX_ID + 4;
 
     // Logging parameters
     private static final String TAG = "RewardsDbAdapter";
