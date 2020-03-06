@@ -24,11 +24,12 @@ public class MainActivity extends AppCompatActivity {
     public static final String PREF_NAME = "myPreferences";
     public static final String NAME = "myName";
     public static final String AIRLINE = "myAirine";
+    public static final String STATUS = "myStatus";
     public static final String MILES = "myMilesFlown";
 
     private int miles = 0;
     private int milesBalance;
-    String customer, airlinePlan;
+    String customer, airlinePlan, currentStatus;
     private String name = "None";
 
     private Button btnFindStatus, btnRestart;
@@ -255,7 +256,7 @@ public class MainActivity extends AppCompatActivity {
             editor.putInt(MILES, num);
             editor.commit();
 
-            mDbAdapter.createCustomer(customer, airlinePlan, milesBalance);
+            mDbAdapter.createCustomer(customer, airlinePlan, "No Rewards", milesFlown);
 
             // debug
             // Toast.makeText(getApplicationContext(), "Get Miles Flown " + sharedPrefs.getInt(MILES, 0), Toast.LENGTH_SHORT).show();
@@ -282,21 +283,21 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void insertSomeCustomers() {
-        mDbAdapter.createCustomer("Peter", "Delta", 2500);
-        mDbAdapter.createCustomer("Alyssia", "United", 6725);
-        mDbAdapter.createCustomer("Joe", "Southwest", 5500);
-        mDbAdapter.createCustomer("Shelia", "American", 1500);
-        mDbAdapter.createCustomer("Mark", "BritishAirways", 13000);
-        mDbAdapter.createCustomer("Alexa", "United", 60600);
-        mDbAdapter.createCustomer("Ryan", "United", 18000);
-        mDbAdapter.createCustomer("John", "Southwest", 106000);
-        mDbAdapter.createCustomer("Jill", "American", 9000);
-        mDbAdapter.createCustomer("Christie", "Southwest", 15000);
-        mDbAdapter.createCustomer("Diamond", "Delta", 1500);
-        mDbAdapter.createCustomer("Tuban", "Delta", 26000);
-        mDbAdapter.createCustomer("Gloria", "American", 3500);
-        mDbAdapter.createCustomer("Vickie", "Southwest", 29500);
-        mDbAdapter.createCustomer("Ryan", "United", 6000);
+        mDbAdapter.createCustomer("Peter", "Delta", "Some Value", "2500");
+        mDbAdapter.createCustomer("Alyssia", "United", "No Rewards", "6725");
+        mDbAdapter.createCustomer("Joe", "Southwest", "No Rewards", "5500");
+        mDbAdapter.createCustomer("Shelia", "American", "No Rewards","1500");
+        mDbAdapter.createCustomer("Mark", "BritishAirways", "No Rewards","13000");
+        mDbAdapter.createCustomer("Alexa", "United","Bronze Status", "60600");
+        mDbAdapter.createCustomer("Ryan", "United","No Rewards", "18000");
+        mDbAdapter.createCustomer("John", "Southwest", "Gold Status","106000");
+        mDbAdapter.createCustomer("Jill", "American","No Rewards", "9000");
+        mDbAdapter.createCustomer("Christie", "Southwest","No Rewards", "15000");
+        mDbAdapter.createCustomer("Diamond", "Delta", "No Rewards","1500");
+        mDbAdapter.createCustomer("Tuban", "Delta", "No Rewards","26000");
+        mDbAdapter.createCustomer("Gloria", "American","No Rewards", "3500");
+        mDbAdapter.createCustomer("Vickie", "Southwest", "Bronze Status", "29500");
+        mDbAdapter.createCustomer("Ryan", "United","No Rewards", "6000");
 
 
     }

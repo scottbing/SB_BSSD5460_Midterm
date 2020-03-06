@@ -18,19 +18,21 @@ public class RewardsDbAdapter {
     public static final String COL_ID = "_id";
     public static final String COL_NAME = "name";
     public static final String COL_AIRLINE = "airline";
+    public static final String COL_STATUS = "status";
     public static final String COL_MILES = "miles";
 
     // Indicies
     public static final int INDEX_ID = 0;
     public static final int INDEX_NAME = INDEX_ID + 1;
     public static final int INDEX_AIRLINE = INDEX_ID + 2;
+    public static final int INDEX_STATUS = INDEX_ID + 2;
     public static final int INDEX_MILES = INDEX_ID + 2;
 
     // Logging parameters
     private static final String TAG = "RewardsDbAdapter";
     private DatabaseHelper mDbHelper;
     private SQLiteDatabase mDb;
-    private static final String DATABASE_NAME = "rewards";
+    private static final String DATABASE_NAME = "flyerdb";
     private static final String TABLE_NAME = "tbl_customer";
     private static final int DATABASE_VERSION = 1;
     private static Context mCtx = null;
@@ -41,7 +43,8 @@ public class RewardsDbAdapter {
                     COL_ID + " INTEGER PRIMARY KEY autoincrement, " +
                     COL_NAME + " TEXT, " +
                     COL_AIRLINE + " TEXT, " +
-                    COL_MILES + " INTEGER )";
+                    COL_STATUS + " TEXT, " +
+                    COL_MILES + " TEXT )";
 
 
     // Constructor
@@ -77,20 +80,23 @@ public class RewardsDbAdapter {
         }
     }
 
+
     // Make a new customer
-    public void createCustomer(String name, String airline, int  miles) {
+    public void createCustomer(String name, String airline, String status, String miles ) {
         ContentValues values = new ContentValues();
         values.put(COL_NAME, name);
         values.put(COL_AIRLINE, airline);
+        values.put(COL_STATUS, status);
         values.put(COL_MILES, miles);
         mDb.insert(TABLE_NAME, null, values);
-    }
+}
 
     //  Same as above but includes customer
     public long createCustomer(Customer customer) {
         ContentValues values = new ContentValues();
         values.put(COL_NAME, customer.getName()); // Contact Name
         values.put(COL_AIRLINE, customer.getAirline());
+        values.put(COL_STATUS, customer.getStatus());
         values.put(COL_MILES, customer.getMiles());
 
         // Inserting Row
@@ -101,7 +107,7 @@ public class RewardsDbAdapter {
     public Customer fetchCustomerById(int id) {
 
         Cursor cursor = mDb.query(TABLE_NAME, new String[]{COL_ID,
-                        COL_NAME, COL_AIRLINE, COL_MILES}, COL_ID + "=?",
+                        COL_NAME, COL_AIRLINE, COL_STATUS ,COL_MILES}, COL_ID + "=?",
                 new String[]{String.valueOf(id)}, null, null, null, null
         );
         if (cursor != null)
@@ -110,7 +116,8 @@ public class RewardsDbAdapter {
                 cursor.getInt(INDEX_ID),
                 cursor.getString(INDEX_NAME),
                 cursor.getString(INDEX_AIRLINE),
-                cursor.getInt(INDEX_MILES)
+                cursor.getString(INDEX_STATUS),
+                cursor.getString(INDEX_MILES)
         );
 
     }
@@ -119,7 +126,7 @@ public class RewardsDbAdapter {
     public Customer fetchCustomerByName(String name) {
 
         Cursor cursor = mDb.query(TABLE_NAME, new String[]{COL_NAME,
-                        COL_NAME, COL_AIRLINE, COL_MILES}, COL_NAME + "=?",
+                        COL_NAME, COL_AIRLINE, COL_STATUS, COL_MILES}, COL_NAME + "=?",
                 new String[]{String.valueOf(name)}, null, null, null, null
         );
         if (cursor.getCount() != 0)
@@ -128,7 +135,8 @@ public class RewardsDbAdapter {
                 cursor.getInt(INDEX_ID),
                 cursor.getString(INDEX_NAME),
                 cursor.getString(INDEX_AIRLINE),
-                cursor.getInt(INDEX_MILES)
+                cursor.getString(INDEX_STATUS),
+                cursor.getString(INDEX_MILES)
         );
 
     }
@@ -138,7 +146,7 @@ public class RewardsDbAdapter {
     // Get all customers
     public Cursor fetchAllRewards() {
         Cursor mCursor = mDb.query(TABLE_NAME, new String[]{COL_ID,
-                        COL_NAME, COL_AIRLINE, COL_MILES },
+                        COL_NAME, COL_AIRLINE, COL_STATUS, COL_MILES },
                 null, null, null, null, null
         );
         if (mCursor != null) {
@@ -152,6 +160,7 @@ public class RewardsDbAdapter {
         ContentValues values = new ContentValues();
         values.put(COL_NAME, customer.getName());
         values.put(COL_AIRLINE, customer.getAirline());
+        values.put(COL_STATUS, customer.getStatus());
         values.put(COL_MILES, customer.getMiles());
         mDb.update(TABLE_NAME, values,
                 COL_ID + "=?", new String[]{String.valueOf(customer.getId())});

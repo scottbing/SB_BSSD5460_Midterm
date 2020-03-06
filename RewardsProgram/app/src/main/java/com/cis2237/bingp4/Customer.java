@@ -5,7 +5,26 @@ public class Customer {
     private int id;
     private String name;
     private String airline;
-    private int miles;
+    private String status;
+    private String miles;
+
+    public Customer() {}
+
+    public Customer(int id, String name, String airline, String status, String miles) {
+        this.id = id;
+        this.name = name;
+        this.airline = airline;
+        this.status = status;
+        this.miles = miles;
+    }
+
+    public String getMiles() { return miles; }
+
+    public void setMiles(String miles) { this.miles = miles; }
+
+    public String getStatus() { return status; }
+
+    public void setStatus(String status) { this.status = status; }
 
     public String getAirline() {
         return airline;
@@ -13,23 +32,6 @@ public class Customer {
 
     public void setAirline(String airline) {
         this.airline = airline;
-    }
-
-    public Customer() {}
-
-    public Customer(int id, String name, String airline, int miles) {
-        this.id = id;
-        this.name = name;
-        this.airline = airline;
-        this.miles = miles;
-    }
-
-    public int getMiles() {
-        return miles;
-    }
-
-    public void setMiles(int miles) {
-        this.miles = miles;
     }
 
     public int getId() {

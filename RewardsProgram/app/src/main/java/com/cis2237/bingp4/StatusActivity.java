@@ -28,7 +28,7 @@ public class StatusActivity extends AppCompatActivity {
     public static final String AIRLINE = "myAirline";
     public static final String STATUS = "myStatus";
 
-    private int miles = 0;
+    private String miles = "0";
     private String name = "None";
     private String airline = "None";
     private String status = "No Rewards";
@@ -54,18 +54,16 @@ public class StatusActivity extends AppCompatActivity {
         btnRedeemRewards = (Button)findViewById(R.id.btnRedeemRewards);
         imgReward = (ImageView) findViewById(R.id.imgReward);
 
-        sharedPrefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
-
         mDbAdapter = new RewardsDbAdapter(this);
         mDbAdapter = RewardsDbAdapter.getInstance();
         mDbAdapter.open();
 
-        // get and display current values
+        /*// get and display current values
         txtName.setText(sharedPrefs.getString(NAME, "None"));
         txtAirline.setText(sharedPrefs.getString(AIRLINE, "None"));
         miles = sharedPrefs.getInt(MILES,0);
         txtMilesAccumulated.setText(Integer.toString(miles));
-
+*/
         // debug
         // Toast.makeText(getApplicationContext(), "before Determine Rewards ", Toast.LENGTH_LONG).show();
         // determine Rewards
@@ -166,36 +164,25 @@ public class StatusActivity extends AppCompatActivity {
 
     public void determineRewards() {
 
+        int milesBalance = Integer.parseInt(miles);
         // determine Rewards
-        if (miles >= 25000 && miles < 50000) {  // Bronze Status
+        if (milesBalance >= 25000 && milesBalance < 50000) {  // Bronze Status
             status = "Bronze Status";
-            SharedPreferences.Editor editor = sharedPrefs.edit();
-            editor.putString(STATUS, status);
-            editor.commit();
             txtStatus.setText(status);
             imgReward.setImageResource(R.drawable.bronze);
         }
-        else if (miles >= 50000 && miles < 75000) {  // Silver Status
+        else if (milesBalance >= 50000 && milesBalance < 75000) {  // Silver Status
             status = "Silver Status";
-            SharedPreferences.Editor editor = sharedPrefs.edit();
-            editor.putString(STATUS, status);
-            editor.commit();
             txtStatus.setText(status);
             imgReward.setImageResource(R.drawable.silver);
         }
-        else if (miles >= 75000) {  // Gold Status
+        else if (milesBalance >= 75000) {  // Gold Status
             status = "Gold Status";
-            SharedPreferences.Editor editor = sharedPrefs.edit();
-            editor.putString(STATUS, status);
-            editor.commit();
             txtStatus.setText(status);
             imgReward.setImageResource(R.drawable.gold);
         }
         else {
             status = "No Rewards";
-            SharedPreferences.Editor editor = sharedPrefs.edit();
-            editor.putString(STATUS, status);
-            editor.commit();
             txtStatus.setText(status);
             imgReward.setImageResource(R.drawable.rewards);
         }
@@ -208,17 +195,18 @@ public class StatusActivity extends AppCompatActivity {
     private void displayPreferences() {
         Intent intent = getIntent();
         String user_name = intent.getStringExtra("USER_NAME");
-        Customer customer = mDbAdapter.fetchCustomerByName("Peter");
+        Customer customer = mDbAdapter.fetchCustomerByName(user_name);
+        //Customer customer = mDbAdapter.fetchCustomerByName("Jill");
         name = customer.getName();
         txtName.setText(name);
 
         miles = customer.getMiles();
-        txtMilesAccumulated.setText(Integer.toString(miles));
+        txtMilesAccumulated.setText(miles);
 
         airline = customer.getAirline();
         txtAirline.setText(airline);
 
-        status = sharedPrefs.getString(STATUS, "");
+        status = customer.getStatus();
         txtStatus.setText(status);
     }
 
