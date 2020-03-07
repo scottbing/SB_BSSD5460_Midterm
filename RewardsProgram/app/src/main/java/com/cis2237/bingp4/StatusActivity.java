@@ -195,8 +195,8 @@ public class StatusActivity extends AppCompatActivity {
     private void displayPreferences() {
         Intent intent = getIntent();
         String user_name = intent.getStringExtra("USER_NAME");
-        Customer customer = mDbAdapter.fetchCustomerByName(user_name);
-        //Customer customer = mDbAdapter.fetchCustomerByName("Jill");
+        //Customer customer = mDbAdapter.fetchCustomerByName(user_name);
+        Customer customer = mDbAdapter.fetchCustomerByName("Vickie");
         name = customer.getName();
         txtName.setText(name);
 
